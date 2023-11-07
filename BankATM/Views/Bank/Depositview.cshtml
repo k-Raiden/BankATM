@@ -1,0 +1,22 @@
+﻿@model CustomersViewModel
+@using BankATM.DataAccess.EF.Models
+<div>
+
+    <h1>
+        Please Enter the amount you would like to deposit
+    </h1>
+    <form method="post" action="~/Bank/DepositFunds">
+
+        <input type="hidden" name="CustomerId" value="@Model.CurrentCustomer.CustomerId" />
+        <div class="mb-3">
+            <label for="DepositAmount" class="form-label">Deposit Amount</label>
+            <input type="number" class="" name="DepositAmount">
+        </div>
+        <div>
+            <button class=" btn btn-primary" type="submit">Save! </button>
+        </div>
+
+    </form>
+
+</div>
+
