@@ -9,6 +9,6 @@ namespace BankATM.Models
 
         public CustomersInfo ?CurrentCustomer { get; set; } 
 
-        public List<CustomersInfo> CustomersList { get; set;} = new List<CustomersInfo>();
+        public List<CustomersInfo> CustomersList { get; set;}
     }
 }

@@ -12,11 +12,11 @@ namespace BankATM.Controllers
     {
         private readonly CustomersRepository _repo;
 
-        public BankController(CustomersRepository repo, ApplicationDbContext context)
+        public BankController( )
         {
-            _repo = repo;
+            _repo = new CustomersRepository();  
 
-            _context = context;
+            
         }
 
         public IActionResult Index()
@@ -30,23 +30,32 @@ namespace BankATM.Controllers
             return View(account);
         }
 
-        private readonly ApplicationDbContext _context;
 
    
         public IActionResult Login()
         {
-            return View();
+            LoginViewModel myuser = new LoginViewModel();
+
+            return View(myuser);
         }
 
         [HttpPost]
         public IActionResult Login(LoginViewModel model)
         {
+            CustomersInfo myuser = new CustomersInfo()
+            {
+                AccountNumber = model.AccountNumber,
+                
+                PinNumber = model.PinNumber,//maping user into the log in view model into customer info.
+
+            };
+
             if (ModelState.IsValid)
             {
                 // Check if the user exists in the database
-                var user = _context.Users.FirstOrDefault(u => u.Username == model.AccountNumber && u.Password == model.PinNumber);
+                var user = _repo.FindUser(myuser);
 
-                if (user != null)
+                if (user)
                 {
                     // User authentication successful
                     // You can set a session or cookie here to remember the user's session
@@ -58,7 +67,9 @@ namespace BankATM.Controllers
                 }
             }
             return View(model);
+
         }
+        
 
         public IActionResult CustomersDetails(int id)
         {

@@ -66,6 +66,17 @@ namespace BankATM.DataAccess.EF.Repository
 
             return false;
         }
+        public bool FindUser(CustomersInfo myuser) 
+        {
+            var user = _context.CustomersInfos.FirstOrDefault(u => u.AccountNumber  == myuser.AccountNumber && u.PinNumber == myuser.PinNumber);
+            
+            if (user == null) 
+            {
+                return false;
+            
+            }
+            return true;
+        }
 
         public List<CustomersInfo> GetAllCustomersInfos()
         {
