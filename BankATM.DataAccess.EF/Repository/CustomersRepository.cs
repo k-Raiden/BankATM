@@ -17,6 +17,7 @@ namespace BankATM.DataAccess.EF.Repository
 
         public CustomersRepository()
         {
+
         }
 
         public CustomersInfo Create(CustomersInfo model)
